@@ -77,6 +77,9 @@ namespace TeknikServisApp.Formlar
 
         private void btnListele_Click(object sender, EventArgs e)
         {
+            //Listeyi yenile//
+            var urunler = db.Urun.ToList();
+            gridControl1.DataSource = urunler;
 
         }
 
