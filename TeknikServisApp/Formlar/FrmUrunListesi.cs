@@ -18,13 +18,30 @@ namespace TeknikServisApp.Formlar
         }
 
         TeknikServisEntities db = new TeknikServisEntities();
-        private void gridControl1_Click(object sender, EventArgs e)
+        void uruncekme()
         {
-            var urunler = db.Urun.ToList();
-            gridControl1.DataSource = urunler;
+            var urunler = from urun in db.Urun
+                          select new
+                          {
+                              urun.ID,
+                              urun.AD,
+                              urun.MARKA,
+                              urun.ALISFIYAT,
+                              urun.SATISFIYAT,
+                              urun.STOK,
+                          };
+            gridControl1.DataSource = urunler.ToList();
 
         }
 
+
+        private void gridControl1_Load(object sender, EventArgs e)
+        {
+
+
+            uruncekme();
+            lookUpEdit1.Properties.DataSource = db.Kategori.ToList();
+        }
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
@@ -34,14 +51,15 @@ namespace TeknikServisApp.Formlar
             urun.ALISFIYAT = decimal.Parse(txtAlisFiyat.Text);
             urun.SATISFIYAT = decimal.Parse(txtSatisFiyat.Text);
             urun.STOK = short.Parse(txtStok.Text);
+            urun.KATEGORI = byte.Parse(lookUpEdit1.EditValue.ToString());
             urun.DURUM = false;
             db.Urun.Add(urun);
             db.SaveChanges();
             MessageBox.Show("Ürün kaydedildi", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             //Kaydettikten sonra listeyi yenile//
-            var urunler = db.Urun.ToList();
-            gridControl1.DataSource = urunler;
+            uruncekme();
+            lookUpEdit1.Properties.DataSource = db.Kategori.ToList();
         }
 
         private void btnSil_Click(object sender, EventArgs e)
@@ -51,10 +69,10 @@ namespace TeknikServisApp.Formlar
             db.Urun.Remove(urun);
             db.SaveChanges();
             MessageBox.Show("Ürün silindi", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-            
+
             //Sildikten sonra listeyi yenile//
-            var urunler = db.Urun.ToList();
-            gridControl1.DataSource = urunler;
+            uruncekme();
+            lookUpEdit1.Properties.DataSource = db.Kategori.ToList();
         }
 
         private void btnGuncelle_Click(object sender, EventArgs e)
@@ -66,31 +84,34 @@ namespace TeknikServisApp.Formlar
             urun.ALISFIYAT = decimal.Parse(txtAlisFiyat.Text);
             urun.SATISFIYAT = decimal.Parse(txtSatisFiyat.Text);
             urun.STOK = short.Parse(txtStok.Text);
+            urun.KATEGORI = byte.Parse(lookUpEdit1.EditValue.ToString());
             db.SaveChanges();
             MessageBox.Show("Ürün güncellendi", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             //Güncelledikten sonra listeyi yenile//
-            var urunler = db.Urun.ToList();
-            gridControl1.DataSource = urunler;
+            uruncekme();
+            lookUpEdit1.Properties.DataSource = db.Kategori.ToList();
 
         }
 
         private void btnListele_Click(object sender, EventArgs e)
         {
             //Listeyi yenile//
-            var urunler = db.Urun.ToList();
-            gridControl1.DataSource = urunler;
+            uruncekme();
+            lookUpEdit1.Properties.DataSource = db.Kategori.ToList();
 
         }
 
         private void gridView1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
+            /*
             txtUrunID.Text = gridView1.GetFocusedRowCellValue("ID").ToString();
             txtUrunAdi.Text = gridView1.GetFocusedRowCellValue("AD").ToString();
             txtMarka.Text = gridView1.GetFocusedRowCellValue("MARKA").ToString();
             txtAlisFiyat.Text = gridView1.GetFocusedRowCellValue("ALISFIYAT").ToString();
             txtSatisFiyat.Text = gridView1.GetFocusedRowCellValue("SATISFIYAT").ToString();
-            txtStok.Text = gridView1.GetFocusedRowCellValue("STOK").ToString();
+            txtStok.Text = gridView1.GetFocusedRowCellValue("STOK").ToString(); */
         }
+
     }
 }
