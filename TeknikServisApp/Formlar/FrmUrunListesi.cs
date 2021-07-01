@@ -29,6 +29,7 @@ namespace TeknikServisApp.Formlar
                               urun.ALISFIYAT,
                               urun.SATISFIYAT,
                               urun.STOK,
+                              Kategori = urun.Kategori1.AD,
                           };
             gridControl1.DataSource = urunler.ToList();
 
@@ -104,13 +105,12 @@ namespace TeknikServisApp.Formlar
 
         private void gridView1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            /*
             txtUrunID.Text = gridView1.GetFocusedRowCellValue("ID").ToString();
             txtUrunAdi.Text = gridView1.GetFocusedRowCellValue("AD").ToString();
             txtMarka.Text = gridView1.GetFocusedRowCellValue("MARKA").ToString();
             txtAlisFiyat.Text = gridView1.GetFocusedRowCellValue("ALISFIYAT").ToString();
             txtSatisFiyat.Text = gridView1.GetFocusedRowCellValue("SATISFIYAT").ToString();
-            txtStok.Text = gridView1.GetFocusedRowCellValue("STOK").ToString(); */
+            txtStok.Text = gridView1.GetFocusedRowCellValue("STOK").ToString(); 
         }
 
     }

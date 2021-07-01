@@ -19,11 +19,20 @@ namespace TeknikServisApp
 
         private void BtnUrunListesiFormu_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            Formlar.FrmUrunListesi fr = new Formlar.FrmUrunListesi();
-            fr.MdiParent = this;
-            fr.Show();
+            Formlar.FrmUrunListesi urunlistesi = new Formlar.FrmUrunListesi();
+            urunlistesi.MdiParent = this;
+            urunlistesi.Show();
 
         }
 
+        private void btnYeniUrun_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Formlar.FrmUrunListesi urunlistesi = new Formlar.FrmUrunListesi();
+            urunlistesi.MdiParent = this;
+            urunlistesi.Show();
+
+            Formlar.FrmYeniUrun yeniurunpenceresi = new Formlar.FrmYeniUrun();
+            yeniurunpenceresi.Show();
+        }
     }
 }
