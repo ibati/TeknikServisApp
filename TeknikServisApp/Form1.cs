@@ -34,5 +34,12 @@ namespace TeknikServisApp
             Formlar.FrmYeniUrun yeniurunpenceresi = new Formlar.FrmYeniUrun();
             yeniurunpenceresi.Show();
         }
+
+        private void btnKategoriListesi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Formlar.FrmKategoriListesi kategorilistesi = new Formlar.FrmKategoriListesi();
+            kategorilistesi.MdiParent = this;
+            kategorilistesi.Show();
+        }
     }
 }
